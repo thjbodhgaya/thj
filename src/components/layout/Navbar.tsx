@@ -112,7 +112,7 @@ export default function SolidKineticNavbar() {
             <Link href="/" className="flex items-center">
 
               <div className="relative w-14 h-14 md:w-16 md:h-16 transition-transform duration-1000 group-hover:rotate-[15deg]">
-                <Image src="/Logo.png" alt="Logo" fill className="object-contain" priority />
+                <Image src="/logo.png" alt="Logo" fill className="object-contain" priority />
               </div>
 
               <motion.div
@@ -291,7 +291,7 @@ export default function SolidKineticNavbar() {
             {/* Top Bar inside Menu */}
             <div className="p-8 md:p-12 flex justify-between items-center">
               <div className="relative w-16 h-16 md:w-24 md:h-24">
-                 <Image src="/Logo.png" alt="Logo" fill className="object-contain brightness-200" />
+                 <Image src="/logo.png" alt="Logo" fill className="object-contain brightness-200" />
               </div>
               <button 
                 onClick={() => setIsMenuOpen(false)}
