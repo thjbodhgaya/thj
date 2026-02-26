@@ -35,22 +35,22 @@ type Product = {
 
 async function getProduct(id: string): Promise<Product | null> {
   const res = await fetch(`${process.env.API_URL}/products/${id}`, {
-    next: { revalidate: 60 }, // ISR: refresh every 60s
+    { cache: "no-store" }
   });
 
   if (!res.ok) return null;
   return res.json();
 }
 
-type Props = { params: Promise<{ id: string }> };
+// type Props = { params: Promise<{ id: string }> };
 
-// type Props = {
-//   params: { id: string };
-// };
+type Props = {
+  params: { id: string };
+};
 
 
 export default async function ProductPage({ params }: Props) {
-  const { id } = await params;
+const { id } = params;
 const product = await getProduct(id);
 
 // const product = await getProduct(params.id);
