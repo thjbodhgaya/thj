@@ -87,7 +87,7 @@ export default function SolidKineticNavbar() {
 
         <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
 
-        <div className="container mx-auto px-8 md:px-16 flex items-center justify-between">
+        <div className="container mx-auto px-6 md:px-16 flex items-center justify-between">
 
           {/* LEFT */}
           <div className="flex-1 flex items-center">
@@ -106,8 +106,8 @@ export default function SolidKineticNavbar() {
 
           {/* CENTER */}
           <motion.div
-            style={{ scale: logoScale, gap: contentGap }}
-            className="flex items-center group cursor-pointer"
+            style={{ scale: logoScale }}
+            className="flex items-center gap-4 md:gap-8 group cursor-pointer"
           >
             <Link href="/" className="flex items-center">
 
@@ -118,14 +118,14 @@ export default function SolidKineticNavbar() {
               <motion.div
                 animate={{ rotate: isScrolled ? 0 : 25 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="w-[1px] h-10 bg-stone-300 mx-8"
+                className="w-[1px] h-8 md:h-10 bg-stone-300 mx-4 md:mx-8"
               />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col leading-tight">
                 <h1 className={`${cormorant.className} text-3xl md:text-4xl leading-none text-stone-900`}>
                   Tibetan
                 </h1>
-                <div className="flex items-center gap-2 mt-1">
+                <div className="flex items-center gap-1 md:gap-2 mt-1">
                   <span className="h-[1px] w-2 md:w-4 bg-amber-500" />
                   <span className={`${jost.className} text-[6px] md:text-[8px] uppercase tracking-[0.4em] md:tracking-[0.8em] text-amber-700 font-semibold whitespace-nowrap`}>
                   Handicraft & Jewellery
@@ -325,28 +325,36 @@ export default function SolidKineticNavbar() {
             </div>
 
             {/* Footer inside Menu */}
-            <div className="p-20 flex justify-between items-end border-t border-stone-900">
-               <div className="space-y-4">
-                 <p className={`${jost.className} text-[10px] uppercase tracking-[0.5em] text-stone-500`}>Global Concierge</p>
-                 <p className="text-white text-xl">sidbodhgaya@gmail.com</p>
-               </div>
-               
-               <div className="flex gap-10">
+            {/* Footer inside Menu */}
+<div className="px-6 md:px-20 py-10 md:py-16 flex flex-col md:flex-row gap-10 md:gap-0 justify-between items-start md:items-end border-t border-stone-900">
 
-                 <span className="w-12 h-12 border border-stone-800 rounded-full flex items-center justify-center text-stone-400 hover:text-white hover:border-white transition-all cursor-pointer">
-                   <Instagram size={18} />
-                 </span>
+  {/* LEFT */}
+  <div className="space-y-4">
+    <p className={`${jost.className} text-[10px] uppercase tracking-[0.5em] text-stone-500`}>
+      Global Concierge
+    </p>
+    <p className="text-white text-lg md:text-xl break-all">
+      sidbodhgaya@gmail.com
+    </p>
+  </div>
 
-                 <span className="w-12 h-12 border border-stone-800 rounded-full flex items-center justify-center text-stone-400 hover:text-white hover:border-white transition-all cursor-pointer">
-                   <Facebook size={16} />
-                 </span>
+  {/* RIGHT - SOCIAL ICONS */}
+  <div className="flex gap-6 md:gap-10 flex-wrap">
 
-                 <span className="w-12 h-12 border border-stone-800 rounded-full flex items-center justify-center text-stone-400 hover:text-white hover:border-white transition-all cursor-pointer">
-                   <Twitter size={18} />
-                 </span>
+    {[Instagram, Facebook, Twitter].map((Icon, i) => (
+      <span
+        key={i}
+        className="w-10 h-10 md:w-12 md:h-12 border border-stone-800 rounded-full 
+        flex items-center justify-center 
+        text-stone-400 hover:text-white hover:border-white 
+        transition-all cursor-pointer"
+      >
+        <Icon size={16} className="md:w-[18px] md:h-[18px]" />
+      </span>
+    ))}
 
-               </div>
-            </div>
+  </div>
+</div>
           </motion.div>
         )}
       </AnimatePresence>
