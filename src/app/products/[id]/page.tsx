@@ -11,9 +11,6 @@ import { Cormorant_Garamond, Jost } from "next/font/google";
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "500"] });
 const jost = Jost({ subsets: ["latin"], weight: ["300", "400", "600"] });
 
-// export async function generateStaticParams() {
-//   return products.map((product) => ({ id: String(product.id) }));
-// }
 
 
 type Product = {
@@ -33,32 +30,60 @@ type Product = {
   sizes?: string[];
 };
 
-async function getProduct(id: string): Promise<Product | null> {
+// async function getProduct(id: string): Promise<Product | null> {
+//   const res = await fetch(`${process.env.API_URL}/products/${id}`, {
+//     next: { revalidate: 60 }, // ISR: refresh every 60s
+//   });
+
+//   if (!res.ok) return null;
+//   return res.json();
+// }
+
+// type Props = { params: Promise<{ id: string }> };
+
+export async function generateStaticParams() {
   const res = await fetch(
-  `${process.env.API_URL}/products/${id}`,
-  { cache: "no-store" }
-);
+    "https://thj-backend.onrender.com/api/products",
+    { cache: "force-cache" }
+  );
+
+  const products = await res.json();
+
+  return products.map((product: any) => ({
+    id: product._id.toString(),
+  }));
+}
+
+
+
+// export default async function ProductPage({ params }: Props) {
+//   const { id } = await params;
+// const product = await getProduct(id);
+
+
+//    if (!product) return notFound();
+   
+ async function getProduct(id: string): Promise<Product | null> {
+  const res = await fetch(
+    `https://thj-backend.onrender.com/api/products/${id}`,
+    { cache: "force-cache" }
+  );
 
   if (!res.ok) return null;
   return res.json();
 }
 
-// type Props = { params: Promise<{ id: string }> };
-
+/* ================= PAGE ================= */
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 
 export default async function ProductPage({ params }: Props) {
-const { id } = params;
-const product = await getProduct(id);
+   const { id } = await params;
+  const product = await getProduct(id);
 
-// const product = await getProduct(params.id);
-   if (!product) return notFound();
-   
-  // const product = products.find((p) => p.id === Number(id));
-  // if (!product) return notFound();
+  if (!product) return notFound();
 
   const rating = product.rating ?? 5;
   const reviews = product.reviewsCount ?? 0;
