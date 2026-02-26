@@ -34,9 +34,10 @@ type Product = {
 };
 
 async function getProduct(id: string): Promise<Product | null> {
-  const res = await fetch(`${process.env.API_URL}/products/${id}`, {
-    { cache: "no-store" }
-  });
+  const res = await fetch(
+  `${process.env.API_URL}/products/${id}`,
+  { cache: "no-store" }
+);
 
   if (!res.ok) return null;
   return res.json();
