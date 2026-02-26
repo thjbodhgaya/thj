@@ -67,7 +67,7 @@ export default function SplashScreen() {
 >
 
               <Image
-                src="/Logo.png"
+                src="/logo.png"
                 alt="Logo"
                 fill
                 className="object-contain"
